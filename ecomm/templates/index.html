@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div class="jumbotron" style="background-color: #8243bc;">
+    <div class=" container">
+        <div class="row">
+            <div class="col-md-3">
+                <h1 class="text-white">A place you can Trust, Try out our top brands</h1>
+            </div>
+            <div class="col-md">
+                <h3 class="text-white"><a href="#" style="text-decoration: none;">Sign In</a> to place an order Now</h3>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h3>Trends</h3>
+    <hr>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            {% include 'includes/products.html'%}
+        </div>
+        {% endfor %}
+    </div>
+
+
+    <h3>Top Buy</h3>
+    <hr>
+    <div class="row">
+        {% for product in products %}
+        <div class="col-md-4">
+            {% include 'includes/products.html'%}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
