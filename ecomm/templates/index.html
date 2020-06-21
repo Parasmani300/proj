@@ -19,9 +19,11 @@
     <hr>
     <div class="row">
         {% for product in products %}
+        {% if product.trending %}
         <div class="col-md-4">
             {% include 'includes/products.html'%}
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 
@@ -36,6 +38,5 @@
         {% endfor %}
     </div>
 </div>
-
 
 {% endblock %}

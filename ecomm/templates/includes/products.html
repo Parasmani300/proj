@@ -6,11 +6,16 @@
         <p class="card-text">Are You classy, Coz its clasic. Try now and be the fan</p>
         <p class="card-text">Rs. 1000 for 750ml</p>
         <div class="row">
-            <a href="#" class="btn btn-outline-info col-md mr-md-2"><span class="fa fa-shopping-cart"></span>
-                Add to
-                Cart</a>
-            <a href="{{url_for('buy_now',prod_id=product.id)}}" class="btn btn-outline-info col-md mt-2 mt-sm-0"><span
-                    class="fa fa-shopping-cart"></span> Buy
+            <div class="col-md mr-md-2">
+                <form id="{{product.id}}" action="" method="POST">
+                    <input type="hidden" value="{{product.id}}" name="prod_id">
+                    <button type="submit" class="btn btn-outline-info"><span class="fa fa-shopping-cart"></span>
+                        Add to
+                        Cart</button>
+                </form>
+            </div>
+            <a href="{{url_for('buy_now',prod_id=product.id)}}" class="btn btn-outline-info col-md"
+                style="height: 40px;"><span class="fa fa-shopping-cart"></span> Buy
                 Now</a>
         </div>
 
