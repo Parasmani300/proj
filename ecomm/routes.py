@@ -1,5 +1,7 @@
 from ecomm import app
 from flask import Flask, render_template, request, json, Response,redirect,flash,url_for,session
+from flask_login import login_user,current_user,logout_user,login_required
+
 from ecomm.models import User,Products
 from ecomm.forms import LoginForm,RegisterForm
 
@@ -25,6 +27,7 @@ products = [{
 
 @app.route('/',methods=["GET","POST"])
 def index():
+    print(current_user)
     if request.form.get('prod_id'):
         prod_id = request.form.get('prod_id')
         print(prod_id)
@@ -32,6 +35,7 @@ def index():
     return render_template('index.html',products=prod)
 
 @app.route('/buy_now',methods = ['GET','POST'])
+@login_required
 def buy_now():
     prod_id = request.args.get('prod_id')
     prod = {}
@@ -42,15 +46,51 @@ def buy_now():
     
     return render_template('buynow.html',product=product)
 
-@app.route('/login')
+@app.route('/login',methods=['GET','POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+
     form = LoginForm()
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        print(email)
+        print(password)
+        user = User.objects(email=email).first()
+        print(user)
+        if user and user.get_password(password):
+            login_user(user)
+            flash(f'{current_user.firstname},Welcome','success')
+            next = request.args.get('next')
+            return redirect(next or url_for('index'))
+        else:
+            flash("Invalid Credentials",'warning')    
     return render_template('login.html',form=form)
 
-@app.route('/register')
+@app.route('/register',methods=['GET','POST'])
 def register():
     form = RegisterForm()
-    return render_template('register.html',form=form)
+    if form.validate_on_submit():
+        firstname = form.firstname.data
+        lastname = form.lastname.data
+        email = form.email.data
+        password = form.password.data
+        confirm_password = form.confirm_password.data
+        phone_no = form.phone_no.data
+        if password == confirm_password:
+            user = User(user_id=email,firstname=firstname,lastname=lastname,email=email,password=password,phone_no=phone_no)
+            user.set_password(password)
+            user.save()
+            flash('User Registered Successfully','success')
+            return redirect('/')
+    return render_template('register.html',form=form,category='success')
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
 
 @app.route('/user',methods=['GET','POST'])
 def user():

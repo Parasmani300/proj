@@ -3,47 +3,90 @@
 <div class="offset-md-2" style="margin-top: 60px;">
     <div class="col-md-2"></div>
     <div class="col-md-8">
+        {% include 'includes/flash_msg.html'%}
         <div class="card" style="background-color: #8a7c96;">
             <div class="card-body">
                 <h3 class="card-title">Register Now</h3>
                 <hr>
-                <form action="" method="POST">
+                <form action="" method="POST" novalidate>
                     {{form.hidden_tag()}}
                     <div class="form-group">
                         <div class="row">
                             {{form.firstname.label(class="form-control-label col-md-2")}}
                             {{form.firstname(class="form-control col-md-6")}}
                         </div>
+                        {% if form.firstname.errors %}
+                        {% for error in form.firstname.errors %}
+                        <div class="row offset-2">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <div class="row">
                             {{form.lastname.label(class="form-control-label col-md-2")}}
                             {{form.lastname(class="form-control col-md-6")}}
                         </div>
+                        {% if form.lastname.errors %}
+                        {% for error in form.lastname.errors %}
+                        <div class="row offset-2">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <div class="row">
                             {{form.email.label(class="form-control-label col-md-2")}}
                             {{form.email(class="form-control col-md-6")}}
                         </div>
+                        {% if form.email.errors %}
+                        {% for error in form.email.errors %}
+                        <div class="row offset-2">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <div class="row">
                             {{form.password.label(class="form-control-label col-md-2")}}
                             {{form.password(class="form-control col-md-6")}}
                         </div>
+                        {% if form.password.errors %}
+                        {% for error in form.password.errors %}
+                        <div class="row offset-2">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            {{form.confirm_password.label(class="form-control-label col-md-3")}}
+                            {{form.confirm_password.label(class="form-control-label col-md-2")}}
                             {{form.confirm_password(class="form-control col-md-6")}}
                         </div>
+                        {% if form.confirm_password.errors %}
+                        {% for error in form.confirm_password.errors %}
+                        <div class="row offset-2">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <div class="row">
                             {{form.phone_no.label(class="form-control-label col-md-2")}}
                             {{form.phone_no(class="form-control col-md-6")}}
                         </div>
+                        {% if form.phone_no.errors %}
+                        {% for error in form.phone_no.errors %}
+                        <div class="row offset-2">
+                            <p class="text-danger">{{error}}</p>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
                     </div>
                     <div class="form-group">
                         <div class="row">
@@ -54,6 +97,6 @@
             </div>
         </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 </div>
 {% endblock %}

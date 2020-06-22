@@ -14,9 +14,15 @@
                         Cart</button>
                 </form>
             </div>
+            {% if current_user.is_authenticated %}
             <a href="{{url_for('buy_now',prod_id=product.id)}}" class="btn btn-outline-info col-md"
                 style="height: 40px;"><span class="fa fa-shopping-cart"></span> Buy
                 Now</a>
+            {% else %}
+            <a href="{{url_for('login')}}" class="btn btn-outline-info col-md" style="height: 40px;"><span
+                    class="fa fa-shopping-cart"></span> Buy
+                Now</a>
+            {% endif %}
         </div>
 
     </div>
