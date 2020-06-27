@@ -131,3 +131,14 @@ def my_cart():
                 db.child("user").child(user_key).child("cart").child(key_to_delete).remove()
             return redirect(url_for('my_cart'))
     return render_template('my_cart.html',product_list=product_list,user=user,total_price=total_price)
+
+@app.route('/profile')
+def profile():
+    user = validate_session()
+    send_profile = None
+    if user:
+        user_key = user["users"][0]["localId"]
+        display_profile = db.child("user").child(user_key).get()
+        send_profile = dict(display_profile.val())
+        print(send_profile)
+    return render_template("profile.html",user=user,send_profile=send_profile)
