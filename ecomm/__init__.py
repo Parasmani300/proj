@@ -1,19 +1,28 @@
 
 from flask import Flask
 from config import Config
-from flask_login import LoginManager
-from flask_mongoengine import MongoEngine
-from itsdangerous import URLSafeTimedSerializer
+import pyrebase
+
 app = Flask(__name__)
 
 app.config.from_object(Config)
+firebaseConfig = {
+    'apiKey': "AIzaSyBLY55vpRB8OzjXYrGb4v9i3RBtHP58Nn8",
+    'authDomain': "bearit-d00aa.firebaseapp.com",
+    'databaseURL': "https://bearit-d00aa.firebaseio.com",
+    'projectId': "bearit-d00aa",
+    'storageBucket': "bearit-d00aa.appspot.com",
+    'messagingSenderId': "74649264653",
+    'appId': "1:74649264653:web:8da9a8c99b1cd8ad3b2b44",
+    'measurementId': "G-00LF9J63Z8"
+}
 
-db = MongoEngine()
-db.init_app(app)
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.session_protection = "strong"
-#login_serializer = URLSafeTimedSerializer(app.secret_key)
+firebase = pyrebase.initialize_app(firebaseConfig)
+
+auth = firebase.auth()
+
+db = firebase.database()
+
 from ecomm import routes
 
 

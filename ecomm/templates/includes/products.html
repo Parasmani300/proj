@@ -2,27 +2,21 @@
     <img class="card-img-top" src="{{url_for('static',filename='image/sample.png')}}" alt="product image" height="200px"
         width="100px">
     <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
-        <p class="card-text">Are You classy, Coz its clasic. Try now and be the fan</p>
-        <p class="card-text">Rs. 1000 for 750ml</p>
+        <h5 class="card-title">{{product.val().name}}</h5>
+        <p class="card-text">{{product.val().description}}</p>
+        <p class="card-text">Rs.{{product.val().price}} for {{product.val().quantity}} ml</p>
         <div class="row">
             <div class="col-md mr-md-2">
                 <form id="{{product.id}}" action="" method="POST">
-                    <input type="hidden" value="{{product.id}}" name="prod_id">
+                    <input type="hidden" value="{{product.key()}}" name="prod_id">
                     <button type="submit" class="btn btn-outline-info"><span class="fa fa-shopping-cart"></span>
                         Add to
                         Cart</button>
                 </form>
             </div>
-            {% if current_user.is_authenticated %}
-            <a href="{{url_for('buy_now',prod_id=product.id)}}" class="btn btn-outline-info col-md"
+            <a href="{{url_for('buy_now',prod_id=product.key())}}" class="btn btn-outline-info col-md"
                 style="height: 40px;"><span class="fa fa-shopping-cart"></span> Buy
                 Now</a>
-            {% else %}
-            <a href="{{url_for('login')}}" class="btn btn-outline-info col-md" style="height: 40px;"><span
-                    class="fa fa-shopping-cart"></span> Buy
-                Now</a>
-            {% endif %}
         </div>
 
     </div>

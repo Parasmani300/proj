@@ -1,38 +1,37 @@
-from ecomm import db,login_manager
-from flask_login import UserMixin
-from werkzeug.security import generate_password_hash,check_password_hash
 
-@login_manager.user_loader
-def load_user(user_id):
-    return User.objects(pk=user_id).first()
+class User:
+    user_id = ""
+    firstname = ""
+    lastname = ""
+    password = ""
+    phone_no = ""
+    email = ""
 
-class User(db.Document,UserMixin):
-    user_id = db.StringField(unique=True)
-    firstname = db.StringField(max_length=50)
-    lastname = db.StringField(max_length=50)
-    password = db.StringField(max_length=255)
-    phone_no = db.StringField(max_length=20)
-    email = db.StringField(unique=True,max_length=30)
+    def __init__(self,user_id,firstname,lastname,password,phone_no,email):
+        self.user_id = user_id
+        self.firstname = firstname
+        self.lastname = lastname
+        self.password = password
+        self.phone_no = phone_no
+        self.email = email
+    def tojson(self):
+        return {'user_id':self.user_id,'firstname':self.firstname,'lastname':self.lastname,'password':self.password,'phone_no':self.phone_no,'email':self.email}
 
-    def set_password(self,password):
-        self.password = generate_password_hash(password)
-    
-    def get_password(self,password):
-        return check_password_hash(self.password,password)
-    
-    def is_authenticated(self):
-        return True
-    
-    def is_active(self):
-        return self.active
+class Products():
+    id = ""
+    name= ""
+    description = ""
+    price = ""
+    quantity = 0
+    trending = False
 
-    def is_anonymous(self):
-        return False
+    def __init__(self,id,name,description,price,trending,quantity):
+        self.id = id
+        self.name = name
+        self.description = description
+        self.price = price
+        self.trending = trending
+        self.quantity = quantity
+    def tojson(self):
+        return {'id':self.id,'name':self.name,'description':self.description,'price':self.price,'trending':self.trending,'quantity':self.qunatity} 
 
-class Products(db.Document):
-    _id = db.ObjectIdField()
-    id = db.StringField(unique=True)
-    name= db.StringField(max_length=50)
-    description = db.StringField(max_length=255)
-    price = db.StringField(max_length=5)
-    trending = db.BooleanField(default=False)
