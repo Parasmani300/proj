@@ -19,16 +19,39 @@
 </div>
 {% include 'includes/flash_msg.html'%}
 <div class="container">
-    <h3>Trends</h3>
+    <h3>Beer</h3>
     <hr>
     <div class="row">
-        {% for product in products %}
+        {% for product in beers %}
         <div class="col-md-4">
             {% include 'includes/products.html'%}
         </div>
         {% endfor %}
     </div>
+</div>
 
+<div class="container">
+    <h3>Whiskey</h3>
+    <hr>
+    <div class="row">
+        {% for product in whiskeys %}
+        <div class="col-md-4">
+            {% include 'includes/products.html'%}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container">
+    <h3>Vodaka</h3>
+    <hr>
+    <div class="row">
+        {% for product in vodakas %}
+        <div class="col-md-4">
+            {% include 'includes/products.html'%}
+        </div>
+        {% endfor %}
+    </div>
 </div>
 
 {% endblock %}

@@ -1,6 +1,5 @@
 <div class="card">
-    <img class="card-img-top" src="{{url_for('static',filename='image/sample.png')}}" alt="product image" height="200px"
-        width="100px">
+    <img class="card-img-top" src="{{product.val().image_url}}" alt="product image" height="200px" width="100px">
     <div class="card-body">
         <h5 class="card-title">{{product.val().name}}</h5>
         <p class="card-text">{{product.val().description}}</p>

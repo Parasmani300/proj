@@ -2,6 +2,7 @@
 from flask import Flask
 from config import Config
 import pyrebase
+import os
 
 app = Flask(__name__)
 
@@ -22,6 +23,12 @@ firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
 
 db = firebase.database()
+
+UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'static/uploads/')
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
+storage = firebase.storage()
 
 from ecomm import routes
 

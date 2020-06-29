@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row" style="margin-top: 60px;">
+    <div class="col-md-2" style="background-color: #8243BC;">
+        <h3 class="text-white offset-1 mt-1">BearIt</h3>
+        <hr>
+        <div class="container">
+            <p><a class="text-white" data-toggle="collapse" href="#user_option" role="button" aria-expanded="false"
+                    aria-controls="user_option" style="text-decoration: none;">
+                    <h4>Manage User</h4>
+                </a></p>
+            <div class="collapse" id="user_option">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{url_for('admin',view_user='admin_view')}}">
+                            <h6 style="color: #11293F;">View User</h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin',add_user='admin_view')}}">
+                            <h6 style="color: #11293F;">Add User</h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin',delete_user='admin_view')}}">
+                            <h6 style="color: #11293F;">Delete User</h6>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url_for('admin',update_user='admin_view')}}">
+                            <h6 style="color: #11293F;">Update User</h6>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <p><a class="text-white" data-toggle="collapse" href="#product_option" role="button" aria-expanded="false"
+                    aria-controls="user_option" style="text-decoration: none;">
+                    <h4>Product Management</h4>
+                </a></p>
+            <div class="collapse" id="product_option">
+                <ul class="list-unstyled">
+                    <li>
+                        <h6 style="color: #11293F;">View Products</h6>
+                    </li>
+                    <li>
+                        <h6 style="color: #11293F;">Add Products</h6>
+                    </li>
+                    <li>
+                        <h6 style="color: #11293F;">
+                            Delete Product
+                        </h6>
+                    </li>
+                    <li>
+                        <h6 style="color: #11293F;">Update Product</h6>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+            <p><a class="text-white" data-toggle="collapse" href="#payment_option" role="button" aria-expanded="false"
+                    aria-controls="user_option" style="text-decoration: none;">
+                    <h4>Transcitions</h4>
+                </a></p>
+            <div class="collapse" id="payment_option">
+                <ul class="list-unstyled">
+                    <li>
+                        <h6 style="color: #11293F;">View Transcitions</h6>
+                    </li>
+                    <li>
+                        <h6 style="color: #11293F;">Check Payment Status</h6>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="col-md-8">
+
+    </div>
+</div>
+{% endblock %}
