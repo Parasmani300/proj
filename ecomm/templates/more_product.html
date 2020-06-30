@@ -19,42 +19,15 @@
 </div>
 {% include 'includes/flash_msg.html'%}
 <div class="container">
-    <h3>Beer</h3>
+    <h3>{{item_title}}</h3>
     <hr>
     <div class="row">
-        {% for product in beers %}
+        {% for product in products %}
         <div class="col-md-4">
             {% include 'includes/products.html'%}
         </div>
         {% endfor %}
     </div>
-    <a href="{{url_for('index',more_beer='more_beer')}}">more...</a>
-</div>
-
-<div class="container">
-    <h3>Whiskey</h3>
-    <hr>
-    <div class="row">
-        {% for product in whiskeys %}
-        <div class="col-md-4">
-            {% include 'includes/products.html'%}
-        </div>
-        {% endfor %}
-    </div>
-    <a href="{{url_for('index',more_whiskey='more_whiskey')}}">more...</a>
-</div>
-
-<div class="container">
-    <h3>Vodaka</h3>
-    <hr>
-    <div class="row">
-        {% for product in vodakas %}
-        <div class="col-md-4">
-            {% include 'includes/products.html'%}
-        </div>
-        {% endfor %}
-    </div>
-    <a href="{{url_for('index',more_vodaka='more_vodaka')}}">more...</a>
 </div>
 
 {% endblock %}

@@ -33,6 +33,15 @@ def index():
                 'prod_category': prod_category
             }
             db.child("user").child(user_key).child("cart").push(cart_prod)
+        if request.args.get('more_beer'):
+            beer = db.child("products").child("Beer").get()
+            return render_template('more_product.html',user=user,products=beer,item_title='Beer')
+        if request.args.get('more_whiskey'):
+            whiskey = db.child("products").child("Whiskey").get()
+            return render_template('more_product.html',user=user,products=whiskey,item_title='Whiskey')
+        if request.args.get('more_vodaka'):
+            vodaka = db.child("products").child("Vodaka").get()
+            return render_template('more_product.html',user=user,products=vodaka,item_title='Vodaka')
     beer = db.child("products").child("Beer").order_by_key().limit_to_first(3).get()
     whiskey = db.child("products").child("Whiskey").order_by_key().limit_to_first(3).get()
     vodaka = db.child("products").child("Vodaka").order_by_key().limit_to_first(3).get()
