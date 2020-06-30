@@ -6,6 +6,9 @@
             <h3 class="card-title">{{send_profile.firstname}} {{send_profile.lastname}}</h3>
             <p class="card-text">Eamil: {{send_profile.email}}</p>
             <p class="card-text">Phone No: {{send_profile.phone_no}}</p>
+            {% if send_profile.role == 'Admin' %}
+            <p class="card-text"><a href="{{url_for('admin')}}">Admin</a></p>
+            {% endif %}
             <hr>
 
         </div>

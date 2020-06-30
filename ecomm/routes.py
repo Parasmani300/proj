@@ -26,19 +26,25 @@ def index():
         if request.form.get('prod_id'):
             print(user)
             prod_id = request.form.get('prod_id')
+            prod_category = request.form.get('prod_category')
             user_key = user['users'][0]['localId']
-            db.child("user").child(user_key).child("cart").push(prod_id)
-    beer = db.child("products").child("Beer").get()
-    whiskey = db.child("products").child("Whiskey").get()
-    vodaka = db.child("products").child("Vodaka").get()
+            cart_prod = {
+                'prod_id': prod_id,
+                'prod_category': prod_category
+            }
+            db.child("user").child(user_key).child("cart").push(cart_prod)
+    beer = db.child("products").child("Beer").order_by_key().limit_to_first(3).get()
+    whiskey = db.child("products").child("Whiskey").order_by_key().limit_to_first(3).get()
+    vodaka = db.child("products").child("Vodaka").order_by_key().limit_to_first(3).get()
     return render_template('index.html',beers=beer,whiskeys=whiskey,vodakas = vodaka,user=user)
 
 @app.route('/buy_now',methods = ['GET','POST'])
 def buy_now():
     user = validate_session()
     prod_id = request.args.get('prod_id')
+    product_category = request.args.get('prod_category')
     print(prod_id)
-    product = db.child("products").get().val()[prod_id]
+    product = db.child("products").child(product_category).get().val()[prod_id]
     if user == None:
         return redirect(url_for('login'))
     return render_template('buynow.html',product=product,user=user)
@@ -116,8 +122,9 @@ def my_cart():
         if cart_items:
             try:
                 for v in cart_items.each():
-                    product_id = v.val()
-                    item = db.child("products").child(product_id).get().val()
+                    product_id = v.val()['prod_id']
+                    product_category = v.val()['prod_category']
+                    item = db.child("products").child(product_category).child(product_id).get().val()
                     p_item = dict(item)
                     p_item['prod_id'] = product_id
                     total_price = total_price + int(p_item['price'])
@@ -129,7 +136,7 @@ def my_cart():
             delete_id = request.args.get('delete_prod_id')
             key_to_delete = None
             for v in cart_items.each():
-                if v.val() == delete_id:
+                if v.val()['prod_id'] == delete_id:
                     key_to_delete = v.key()
                     break
             if key_to_delete:
@@ -200,7 +207,8 @@ def admin():
                     'price': product_price,
                     'brand': product_brand,
                     'image_url': image_url,
-                    'trending': False
+                    'trending': False,
+                    'Category': product_category
                 }
                 try:
                     db.child("products").child(product_category).push(add_product)

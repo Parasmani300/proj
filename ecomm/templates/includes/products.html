@@ -8,13 +8,14 @@
             <div class="col-md mr-md-2">
                 <form id="{{product.id}}" action="" method="POST">
                     <input type="hidden" value="{{product.key()}}" name="prod_id">
+                    <input type="hidden" value="{{product.val().Category}}" name="prod_category">
                     <button type="submit" class="btn btn-outline-info"><span class="fa fa-shopping-cart"></span>
                         Add to
                         Cart</button>
                 </form>
             </div>
-            <a href="{{url_for('buy_now',prod_id=product.key())}}" class="btn btn-outline-info col-md"
-                style="height: 40px;"><span class="fa fa-shopping-cart"></span> Buy
+            <a href="{{url_for('buy_now',prod_id=product.key(),prod_category=product.val().Category)}}"
+                class="btn btn-outline-info col-md" style="height: 40px;"><span class="fa fa-shopping-cart"></span> Buy
                 Now</a>
         </div>
 

@@ -6,8 +6,7 @@
     <div class="card">
         <div class="row">
             <div class="col-4">
-                <img class="card-img-top" src="{{url_for('static',filename='image/sample.png')}}" alt="product image"
-                    height="200px" width="100px">
+                <img class="card-img-top" src="{{product.image_url}}" alt="product image" height="200px" width="100px">
             </div>
             <div class="col-8">
                 <a href="{{url_for('my_cart',delete_prod_id=product.prod_id)}}"><span class="fa fa-window-close"
