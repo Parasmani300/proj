@@ -54,7 +54,7 @@ pyrsistent==0.16.0
 python-dateutil==2.8.1
 python-dotenv==0.13.0
 python-editor==1.0.4
-python-jwt==2.0.1
+python-jwt==3.3.4
 pytz==2020.1
 regex==2020.6.8
 requests==2.24.0
